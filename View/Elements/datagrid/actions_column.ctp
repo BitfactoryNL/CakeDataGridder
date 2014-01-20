@@ -3,8 +3,7 @@ foreach ($actions as $action) {
 	if ($action['options']['type'] == 'link') {
 		if ($action['options']['method'] == 'post') {
 			echo $this->Form->postLink($action['name'], $action['url'], array_merge($action['options'], array('title' => $action['name'])));
-		}
-		else {
+		} else {
 			echo $this->Html->link($action['name'], $action['url'], array_merge($action['options'], array('title' => $action['name'])));
 		}
 	}
@@ -14,8 +13,7 @@ foreach ($actions as $action) {
 				$this->Html->image($action['options']['image'], array('alt' => $action['name'])),
 				$action['url'], array_merge($action['options'], array('escape' => false, 'title' => $action['name']))
 			);
-		}
-		else {
+		} else {
 			echo $this->Html->link(
 				$this->Html->image($action['options']['image'], array('alt' => $action['name'])),
 				$action['url'], array_merge($action['options'], array('escape' => false, 'title' => $action['name']))
