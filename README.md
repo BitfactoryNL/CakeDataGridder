@@ -376,3 +376,4 @@ The plugin also provides a Component which extends the PaginatorComponent, but w
 
 * Saves pagination options to the Session so the state of the grid is saved
 * Saves filter options of the pagination to the Session so also filtering is saved
+

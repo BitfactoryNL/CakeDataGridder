@@ -123,7 +123,13 @@ class DataGridHelper extends AppHelper {
 			'options' => array()
 		),
 		'noResultsMessage' => null,				//The default can be found in the constructor because we have to translate the text
-		'model' => null
+		'model' => null,
+		'action' => array(						//Default settings for actions
+			'options' => array(
+				'type' => 'link',				//Type of action link: can be 'link' or 'image'
+				'method' => 'get',				//Request method of link, can be 'get' or 'post'
+			)
+		),
 	);
 
 /**
