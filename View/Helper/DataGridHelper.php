@@ -230,6 +230,8 @@ class DataGridHelper extends AppHelper {
 	public function addAction($name, array $url, array $trailingParams = array(), array $options = array(), $confirmMessage = false) {
 		$slug = Inflector::slug($name);
 
+		$options = array_replace_recursive($this->__defaults['action']['options'], $options);
+
 		$this->__actions[$slug] = array(
 			'name' => $name,
 			'url' => $url,
