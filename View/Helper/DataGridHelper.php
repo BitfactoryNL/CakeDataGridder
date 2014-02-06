@@ -115,7 +115,8 @@ class DataGridHelper extends AppHelper {
 					'empty' => false,
 					'id' => false
 				)
-			)
+			),
+			'params' => array()
 		),
 		'filter' => array(						//Default settings for filters
 			'submit' => array(),				//Settings for submit
@@ -795,6 +796,9 @@ class DataGridHelper extends AppHelper {
 		unset($options['limit']);
 
 		$extraOptions = array('model' => $this->__defaults['model'], 'url' => array('model' => $this->__defaults['model']));
+
+		$extraOptions['url'] = array_merge($extraOptions['url'],$this->params['pass']);
+		$extraOptions['url'] = array_merge($extraOptions['url'],$this->__defaults['pagination']['params']);
 
 		if ($this->DataGridPaginator->hasPage($this->__defaults['model'], 2)) {
 			$prevDisabledOptions = $options['prev']['options'];
