@@ -474,6 +474,8 @@ class DataGridHelper extends AppHelper {
 					$label = Router::url($value);
 				}
 				return $this->Html->link($label, $value);
+			case 'price':
+				return $this->__priceColumnData($value, $column);
 			case 'string':
 			default:
 				return $this->__stringColumnData($value, $data, $column);
@@ -707,10 +709,32 @@ class DataGridHelper extends AppHelper {
 				$data = strtotime($data);
 			}
 
-			return CakeTime::format($data, $column['options']['format']);
+			return ($data) ? CakeTime::format($data, $column['options']['format']) : null;
 		}
 
 		return $data;
+	}
+
+/**
+ * Generate a price column
+ * ---
+ *
+ * Show euro sign and format to dutch notation
+ *
+ * @param  Array $data Data record
+ * @param  Array $column Column options
+ * @return String formatted price
+ */
+	private function __priceColumnData($data, $column) {
+
+		App::uses('CakeNumber', 'Utility');
+
+		$currency = 'EUR';
+		if (array_key_exists('format', $column['options'])) {
+			$currency = $column['options']['format'];
+		}
+
+		return (is_numeric($data)) ? CakeNumber::currency($data, $currency) : null;
 	}
 
 /**
@@ -725,7 +749,11 @@ class DataGridHelper extends AppHelper {
  * @return Boolean
  */
 	private function __isValidTimestamp($timestamp) {
-		return (is_numeric($timestamp) && (int)$timestamp === $timestamp);
+		if(is_numeric($timestamp) && strtotime(date('m-d-Y H:i:s',$timestamp)) === $timestamp) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 /**
